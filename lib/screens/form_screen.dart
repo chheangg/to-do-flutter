@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import '../models/models.dart';
 
 class FormScreen extends StatefulWidget {
@@ -65,11 +66,9 @@ class _FormScreenState extends State<FormScreen> {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-          'Grocery Item',
-          style: TextStyle(
-            fontFamily: 'Open Sans',
-            fontWeight: FontWeight.w600
-          ),
+            'Grocery Item',
+            style:
+                TextStyle(fontFamily: 'Open Sans', fontWeight: FontWeight.w600),
           ),
           actions: [
             IconButton(
@@ -78,10 +77,9 @@ class _FormScreenState extends State<FormScreen> {
                   print(_description);
                   print(_content);
                   print(_timestamp);
+                  print(_color);
                 },
-                icon: const Icon(
-                  Icons.check
-                ))
+                icon: const Icon(Icons.check))
           ],
           backgroundColor: theme.primaryColor,
         ),
@@ -107,16 +105,12 @@ class _FormScreenState extends State<FormScreen> {
       children: [
         const Text(
           'Name',
-          style: TextStyle(
-            fontFamily: 'Open Sans',
-            fontWeight: FontWeight.w600
-          ),
+          style:
+              TextStyle(fontFamily: 'Open Sans', fontWeight: FontWeight.w600),
         ),
         TextField(
           controller: _nameController,
-          decoration: const InputDecoration(
-            hintText: 'E.g Clean the room'
-          ),
+          decoration: const InputDecoration(hintText: 'E.g Clean the room'),
         )
       ],
     );
@@ -128,16 +122,13 @@ class _FormScreenState extends State<FormScreen> {
       children: [
         const Text(
           'Description',
-          style: TextStyle(
-            fontFamily: 'Open Sans',
-            fontWeight: FontWeight.w600
-          ),
+          style:
+              TextStyle(fontFamily: 'Open Sans', fontWeight: FontWeight.w600),
         ),
         TextField(
           controller: _descriptionController,
           decoration: const InputDecoration(
-            hintText: 'E.g Clean the chairs, table, and etc.'
-          ),
+              hintText: 'E.g Clean the chairs, table, and etc.'),
         )
       ],
     );
@@ -149,18 +140,15 @@ class _FormScreenState extends State<FormScreen> {
       children: [
         const Text(
           'Content',
-          style: TextStyle(
-            fontFamily: 'Open Sans',
-            fontWeight: FontWeight.w600
-          ),
+          style:
+              TextStyle(fontFamily: 'Open Sans', fontWeight: FontWeight.w600),
         ),
-         TextField(
+        TextField(
           keyboardType: TextInputType.multiline,
           maxLines: null,
           controller: _contentController,
           decoration: const InputDecoration(
-            hintText: 'E.g First do this, then do that, then do this'
-          ),
+              hintText: 'E.g First do this, then do that, then do this'),
         )
       ],
     );
@@ -172,12 +160,48 @@ class _FormScreenState extends State<FormScreen> {
       children: [
         const Text(
           'Color',
-          style: TextStyle(
-            fontFamily: 'Open Sans',
-            fontWeight: FontWeight.w600
-          ),
+          style:
+              TextStyle(fontFamily: 'Open Sans', fontWeight: FontWeight.w600),
         ),
-        
+        const SizedBox(
+          height: 8.0,
+        ),
+        Row(
+          children: [
+            Container(
+              height: 50.0,
+              width: 75.0,
+              color: _color,
+            ),
+            TextButton(
+              child: const Text('Select'),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: BlockPicker(
+                          pickerColor: _color,
+                          onColorChanged: (color) {
+                            setState(() {
+                              _color = color;
+                            });
+                          },
+                        ),
+                        actions: [
+                          TextButton(
+                            child: const Text('Save'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                    });
+              },
+            )
+          ],
+        )
       ],
     );
   }

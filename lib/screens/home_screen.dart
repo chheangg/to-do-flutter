@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
                       },
                   icon: const Icon(Icons.add))
             ]),
-        body: Container(
+        body: SizedBox(
           width: width,
           child: Consumer<TaskManager>(
             builder: (context, taskManager, child) {
