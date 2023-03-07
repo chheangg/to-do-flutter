@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../components/task.dart';
+import 'package:provider/provider.dart';
+import '../models/models.dart';
+import '../components/task_tile.dart';
 import './form_screen.dart';
 
 class Home extends StatefulWidget {
@@ -20,32 +21,43 @@ class _HomeState extends State<Home> {
             backgroundColor: theme.primaryColor,
             title: const Text('Todo App'),
             actions: [
-              IconButton(onPressed: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const FormScreen())
-                )
-              }, icon: const Icon(Icons.add))
+              IconButton(
+                  onPressed: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const FormScreen()))
+                      },
+                  icon: const Icon(Icons.add))
             ]),
         body: Container(
-          padding: EdgeInsets.only(top: 16.0),
           width: width,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            const Task(
-              title: "Test",
-              description: "Test",
-              isDone: true,
-            ),
-            const SizedBox(
-              height: 8.0,
-            ),
-            const Task(
-              title: "Test",
-              description: "Test",
-              isDone: false,
-            )
-          ]),
+          child: Consumer<TaskManager>(
+            builder: (context, taskManager, child) {
+              final tasks = taskManager.tasks;
+
+              if (tasks.isEmpty) {
+                return const Center(child: Text('No tasks today! Add one~'));
+              }
+
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    final task = tasks[index];
+                    return TaskTile(
+                        title: task.name,
+                        description: task.description,
+                        isDone: task.isDone);
+                  },
+                  itemCount: tasks.length,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(height: 16.0);
+                  },
+                ),
+              );
+            },
+          ),
         ));
   }
 }

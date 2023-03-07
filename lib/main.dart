@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_manager.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -12,11 +14,16 @@ class ToDoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Todo',
-        theme:
-            ThemeData(
-              primaryColor: Colors.red[500],
-              fontFamily: 'Open Sans',
-              ),
-        home: const Home());
+        theme: ThemeData(
+          primaryColor: Colors.red[500],
+          fontFamily: 'Open Sans',
+        ),
+        home: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => TaskManager())
+          ],
+          child: const Home(),
+        ),
+    );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Task extends StatelessWidget {
+class TaskTile extends StatelessWidget {
   final String title;
   final String description;
   final bool isDone;
 
-  const Task(
+  const TaskTile(
       {super.key,
       required this.title,
       required this.description,
