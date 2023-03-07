@@ -26,7 +26,18 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => const FormScreen()))
+                                builder: (_) => FormScreen(
+                                      onCreate: (Task newTask) {
+                                        final addTask =
+                                            Provider.of<TaskManager>(context,
+                                                    listen: false)
+                                                .addTask;
+                                        addTask(newTask);
+                                        Navigator.of(context).pop();
+                                      },
+                                      onUpdate: (_) {},
+                                      isUpdating: false,
+                                    )))
                       },
                   icon: const Icon(Icons.add))
             ]),

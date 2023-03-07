@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import '../models/models.dart';
+import 'package:uuid/uuid.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({
     super.key,
     this.task,
+    required this.onCreate,
+    required this.onUpdate,
+    required this.isUpdating,
   });
 
   final Task? task;
+  final Function(Task) onCreate;
+  final Function(Task) onUpdate;
+  final bool isUpdating;
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -18,9 +25,11 @@ class _FormScreenState extends State<FormScreen> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _contentController = TextEditingController();
+  String _id = '';
   String _name = '';
   String _description = '';
   String _content = '';
+  bool _isDone = false;
   DateTime _timestamp = DateTime.now();
   Color _color = Colors.red;
 
@@ -28,6 +37,7 @@ class _FormScreenState extends State<FormScreen> {
   void initState() {
     final originalTask = widget.task;
     if (originalTask != null) {
+      _id = originalTask.id;
       _nameController.text = originalTask.name;
       _name = originalTask.name;
       _descriptionController.text = originalTask.description;
@@ -36,6 +46,9 @@ class _FormScreenState extends State<FormScreen> {
       _content = originalTask.content;
       _color = originalTask.color;
       _timestamp = originalTask.timestamp;
+      _isDone = originalTask.isDone;
+    } else {
+      _id = const Uuid().v4().toString();
     }
 
     _nameController.addListener(() {
@@ -73,17 +86,26 @@ class _FormScreenState extends State<FormScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  print(_name);
-                  print(_description);
-                  print(_content);
-                  print(_timestamp);
-                  print(_color);
+                  final task = Task(
+                    id: _id,
+                    name: _nameController.text,
+                    description: _descriptionController.text,
+                    content: _contentController.text,
+                    isDone: _isDone,
+                    timestamp: _timestamp,
+                    color: _color,
+                  );
+                  if (widget.isUpdating) {
+                    widget.onUpdate(task);
+                  } else {
+                    widget.onCreate(task);
+                  }
                 },
                 icon: const Icon(Icons.check))
           ],
           backgroundColor: theme.primaryColor,
         ),
-        body: Container(
+        body: SizedBox(
             width: size.width,
             child: ListView(
               padding: const EdgeInsets.all(16.0),
