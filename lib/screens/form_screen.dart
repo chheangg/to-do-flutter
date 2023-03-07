@@ -91,8 +91,11 @@ class _FormScreenState extends State<FormScreen> {
               padding: const EdgeInsets.all(16.0),
               children: [
                 _buildNameField(),
+                const SizedBox(height: 16.0),
                 _buildDescriptionField(),
+                const SizedBox(height: 16.0),
                 _buildContentField(),
+                const SizedBox(height: 16.0),
                 _buildColortField()
               ],
             )));
@@ -105,7 +108,14 @@ class _FormScreenState extends State<FormScreen> {
         const Text(
           'Name',
           style: TextStyle(
-            fontFamily: 'Open Sans'
+            fontFamily: 'Open Sans',
+            fontWeight: FontWeight.w600
+          ),
+        ),
+        TextField(
+          controller: _nameController,
+          decoration: const InputDecoration(
+            hintText: 'E.g Clean the room'
           ),
         )
       ],
@@ -119,7 +129,14 @@ class _FormScreenState extends State<FormScreen> {
         const Text(
           'Description',
           style: TextStyle(
-            fontFamily: 'Open Sans'
+            fontFamily: 'Open Sans',
+            fontWeight: FontWeight.w600
+          ),
+        ),
+        TextField(
+          controller: _descriptionController,
+          decoration: const InputDecoration(
+            hintText: 'E.g Clean the chairs, table, and etc.'
           ),
         )
       ],
@@ -133,7 +150,16 @@ class _FormScreenState extends State<FormScreen> {
         const Text(
           'Content',
           style: TextStyle(
-            fontFamily: 'Open Sans'
+            fontFamily: 'Open Sans',
+            fontWeight: FontWeight.w600
+          ),
+        ),
+         TextField(
+          keyboardType: TextInputType.multiline,
+          maxLines: null,
+          controller: _contentController,
+          decoration: const InputDecoration(
+            hintText: 'E.g First do this, then do that, then do this'
           ),
         )
       ],
@@ -147,9 +173,11 @@ class _FormScreenState extends State<FormScreen> {
         const Text(
           'Color',
           style: TextStyle(
-            fontFamily: 'Open Sans'
+            fontFamily: 'Open Sans',
+            fontWeight: FontWeight.w600
           ),
-        )
+        ),
+        
       ],
     );
   }
