@@ -59,7 +59,10 @@ class _HomeState extends State<Home> {
                     return TaskTile(
                         title: task.name,
                         description: task.description,
-                        isDone: task.isDone);
+                        content: task.content,
+                        isDone: task.isDone,
+                        color: task.color,
+                    );
                   },
                   itemCount: tasks.length,
                   separatorBuilder: (BuildContext context, int index) {
