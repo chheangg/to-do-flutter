@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/models.dart';
 
 class TaskTile extends StatefulWidget {
-  final String title;
-  final String description;
-  final String content;
-  final bool isDone;
-  final Color color;
+  final Task task;
 
-  const TaskTile({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.content,
-    required this.isDone,
-    required this.color,
-  });
+  const TaskTile({super.key, required this.task});
 
   @override
   State<TaskTile> createState() => _TaskTileState();
@@ -22,6 +13,7 @@ class TaskTile extends StatefulWidget {
 
 class _TaskTileState extends State<TaskTile> {
   bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -38,31 +30,31 @@ class _TaskTileState extends State<TaskTile> {
             width: width - 25,
             decoration: BoxDecoration(
                 color: Colors.grey[300],
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(8.0)
-                )
-                ),
+                borderRadius: const BorderRadius.all(Radius.circular(8.0))),
             child: Row(children: [
               Container(
                 height: 75,
                 width: 8,
                 decoration: BoxDecoration(
-                  color: widget.color,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    bottomLeft: Radius.circular(8.0)
-                  )
-                ),
+                    color: widget.task.color,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(8.0),
+                        bottomLeft: Radius.circular(8.0))),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 4.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    final changeStatus =
+                        Provider.of<TaskManager>(context, listen: false)
+                            .changeStatusTask;
+                    changeStatus(widget.task);
+                  },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<CircleBorder>(
                         CircleBorder(
                           side: BorderSide(
-                            color: widget.color,
+                            color: widget.task.color,
                             width: 2.0,
                           ),
                         ),
@@ -70,12 +62,12 @@ class _TaskTileState extends State<TaskTile> {
                       iconColor: MaterialStateProperty.all<Color>(Colors.red),
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white)),
-                  child: widget.isDone
-                      ? const Icon(Icons.circle, size: 42)
+                  child: widget.task.isDone
+                      ? Icon(Icons.circle, color: widget.task.color, size: 42)
                       : const Icon(null, size: 42),
                 ),
               ),
-              _buildMainTaskButton(widget.title, widget.description),
+              _buildMainTaskButton(widget.task.name, widget.task.description),
               Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: IconButton(
@@ -90,7 +82,7 @@ class _TaskTileState extends State<TaskTile> {
                   )),
             ]),
           ),
-          if (isExpanded) _buildExpandedContainer(widget.content)
+          if (isExpanded) _buildExpandedContainer(widget.task.content)
         ],
       ),
     );

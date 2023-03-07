@@ -56,13 +56,7 @@ class _HomeState extends State<Home> {
                 child: ListView.separated(
                   itemBuilder: (context, index) {
                     final task = tasks[index];
-                    return TaskTile(
-                        title: task.name,
-                        description: task.description,
-                        content: task.content,
-                        isDone: task.isDone,
-                        color: task.color,
-                    );
+                    return TaskTile(task: task);
                   },
                   itemCount: tasks.length,
                   separatorBuilder: (BuildContext context, int index) {

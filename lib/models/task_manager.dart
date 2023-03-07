@@ -7,6 +7,7 @@ class TaskManager extends ChangeNotifier {
 
   void addTask(Task task) {
     _tasks.add(task);
+    notifyListeners();
   }
 
   void deleteTask(String taskId) {
