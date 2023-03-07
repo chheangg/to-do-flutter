@@ -1,9 +1,5 @@
 <br />
 <div align="center">
-  <a href="https://github.com/chheangg/to-do-flutter">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">Todo app</h3>
 
   <p align="center">
@@ -41,9 +37,9 @@
 ## About The Project
 This is a basic Todo App lets user view, create, and update their Task, and Even change the status of it. It's simple, light and it serves to better my understanding of Flutter.
 
-![Homepage of Todo App](./screenshot/screenshot_1.png)
-![Formpage of Todo App](./screenshot/screenshot_2.png)
-![Homepage Filled of Todo App](./screenshot/screenshot_3.png)
+<img src='./screenshot/screenshot_1.png' width='225'>
+<img src='./screenshot/screenshot_2.png' width='225'>
+<img src='./screenshot/screenshot_3.png' width='225'>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -51,7 +47,7 @@ This is a basic Todo App lets user view, create, and update their Task, and Even
 
 ### Built With
 
-* <a href="https://flutter.dev/" target="_blank" rel="noreferrer"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="dart" width="40" height="40"/> </a>
+* <a href="https://flutter.dev/" target="_blank" rel="noreferrer"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="dart" width="40" height="40"/> Flutter </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -66,8 +62,8 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* flutter 3.7
-* dart
+* Flutter 3.7
+* Dart
 
 ### Installation
 
