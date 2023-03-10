@@ -3,7 +3,7 @@
 <h3 align="center">Todo app</h3>
 
   <p align="center">
-    A Todo made withf lutter and love
+    A Todo app made with Flutter and love
   </p>
 </div>
 
@@ -37,9 +37,11 @@
 ## About The Project
 This is a basic Todo App lets user view, create, and update their Task, and Even change the status of it. It's simple, light and it serves to better my understanding of Flutter.
 
+<div>
 <img src='./screenshot/screenshot_1.png' width='225'>
 <img src='./screenshot/screenshot_2.png' width='225'>
 <img src='./screenshot/screenshot_3.png' width='225'>
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
